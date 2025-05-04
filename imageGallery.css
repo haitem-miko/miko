@@ -1,0 +1,72 @@
+/* Styles for Multi-Image Gallery Container */
+
+.multi-image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+    max-width: 90%;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    padding: 1px;
+    background: linear-gradient(45deg, 
+        rgba(99, 102, 241, 0.1), 
+        rgba(79, 70, 229, 0.1), 
+        rgba(99, 102, 241, 0.1));
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: galleryAppear 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes galleryAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.multi-image-container:hover {
+    box-shadow: var(--shadow-lg), var(--glow-accent);
+    transform: translateY(-3px);
+}
+
+/* Styles for individual images within the gallery */
+.multi-image-container .generated-chat-image {
+    width: 100%;
+    height: auto;
+    max-width: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    box-shadow: var(--shadow-sm);
+}
+
+.multi-image-container .generated-chat-image:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md), 0 0 10px rgba(99, 102, 241, 0.3);
+    z-index: 1;
+    position: relative;
+}
+
+/* Responsive adjustments if needed */
+@media (max-width: 768px) {
+    .multi-image-container {
+        max-width: 100%;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .multi-image-container {
+        gap: 6px;
+    }
+    .multi-image-container .generated-chat-image {
+        border-radius: 4px;
+    }
+}

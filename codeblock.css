@@ -1,0 +1,131 @@
+/* Styles for Code Blocks and Copy Button */
+
+.ai-message .code-block-wrapper {
+    position: relative;
+    margin: 18px 0;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+.ai-message .code-block-wrapper:hover {
+    box-shadow: var(--shadow-lg), var(--glow-accent);
+    transform: translateY(-2px);
+}
+
+.ai-message pre {
+    background: linear-gradient(120deg, rgba(22, 22, 32, 0.95) 0%, rgba(30, 30, 45, 0.95) 100%);
+    color: #e4e4e4;
+    padding: 45px 18px 18px 18px;
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin: 0;
+    border-top: 1px solid rgba(99, 102, 241, 0.08);
+}
+
+.ai-message .code-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 8px 12px;
+    background: linear-gradient(90deg, rgba(28, 28, 44, 0.95) 0%, rgba(35, 35, 55, 0.95) 100%);
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    backdrop-filter: blur(8px);
+}
+
+.ai-message .code-controls::before {
+    content: '';
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 12px;
+    height: 12px;
+    background-color: #ff5f57;
+    border-radius: 50%;
+    box-shadow: 18px 0 0 #ffbd2e, 36px 0 0 #28c941;
+    opacity: 0.7;
+}
+
+.ai-message .code-controls button {
+    background: rgba(99, 102, 241, 0.15);
+    color: var(--text-secondary);
+    border: 1px solid rgba(99, 102, 241, 0.1);
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-message .code-controls button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-message .code-controls button:hover {
+    background: rgba(99, 102, 241, 0.25);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm), 0 0 8px rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.ai-message .code-controls button:hover::before {
+    opacity: 1;
+}
+
+.ai-message .code-controls button:active {
+    transform: translateY(0);
+}
+
+.ai-message .copy-code-button:disabled {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, #5557e0 100%);
+    color: white;
+    cursor: default;
+    border-color: rgba(99, 102, 241, 0.3);
+    box-shadow: var(--shadow-sm), var(--glow-accent);
+}
+
+.ai-message .preview-code-button {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.15) 100%);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.ai-message .preview-code-button:hover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25) 0%, rgba(37, 99, 235, 0.25) 100%);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: var(--shadow-sm), 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.ai-message .code-controls button i {
+    font-size: 0.9em;
+}
+

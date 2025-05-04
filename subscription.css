@@ -1,0 +1,272 @@
+/* Subscription System Styles */
+
+.subscription-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 10, 18, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.subscription-container {
+    max-width: 900px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.plan-card {
+    background: linear-gradient(135deg, var(--panel-bg) 0%, rgba(28, 28, 44, 0.95) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg), var(--glow-accent);
+}
+
+.plan-card:hover::before {
+    opacity: 1;
+}
+
+.plan-header {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.plan-name {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+
+.plan-description {
+    color: var(--text-tertiary);
+    font-size: 0.9em;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.plan-features li {
+    padding: 10px 0;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plan-features li i {
+    color: var(--accent-primary);
+}
+
+.plan-button {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.plan-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.plan-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md), var(--glow-accent);
+}
+
+.plan-button:hover::before {
+    opacity: 1;
+}
+
+/* Special styling for different plans */
+.plan-card.free {
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.plan-card.usi {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.plan-card.usi .plan-button {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.plan-card.vip {
+    border-color: rgba(236, 72, 153, 0.3);
+}
+
+.plan-card.vip .plan-button {
+    background: linear-gradient(135deg, #ec4899 0%, #d946ef 100%);
+}
+
+/* Activation Code Modal */
+.activation-modal {
+    background: linear-gradient(135deg, var(--panel-bg) 0%, rgba(28, 28, 44, 0.98) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+    animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg), var(--glow-accent);
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.activation-modal h2 {
+    margin: 0 0 20px 0;
+    color: var(--text-primary);
+    font-size: 1.3em;
+    text-align: center;
+}
+
+.activation-modal input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    background: rgba(30, 30, 50, 0.6);
+    color: var(--text-primary);
+    font-size: 1em;
+    margin-bottom: 15px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.activation-modal input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    background: rgba(35, 35, 60, 0.7);
+}
+
+.activation-modal .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.activation-modal button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.activation-modal .submit-button {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: white;
+    font-weight: 500;
+}
+
+.activation-modal .get-code-button {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.activation-modal button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md), var(--glow-accent);
+}
+
+.activation-modal .close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.activation-modal .close-button:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .subscription-container {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .plan-card {
+        padding: 20px;
+    }
+
+    .activation-modal {
+        padding: 20px;
+        width: 85%;
+    }
+}

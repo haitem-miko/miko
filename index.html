@@ -1,0 +1,175 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miko AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="reply.css">
+  <link rel="stylesheet" href="codeblock.css">
+  <link rel="stylesheet" href="imagePrompt.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="thinkingMode.css">
+  <link rel="stylesheet" href="imageGallery.css">
+  <link rel="stylesheet" href="imageUpload.css">
+  <link rel="stylesheet" href="subscription.css">
+  <!-- Add Google Fonts for cleaner typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+    {
+      "imports": {
+        "config.js": "./config.js",
+        "chat.js": "./chat.js",
+        "./dom.js": "./dom.js",
+        "./speech.js": "./speech.js",
+        "./tts.js": "./tts.js",
+        "./session.js": "./session.js",
+        "./image.js": "./image.js",
+        "./imageGeneration.js": "./imageGeneration.js",
+        "./imagePromptUI.js": "./imagePromptUI.js",
+        "./imageUpload.js": "./imageUpload.js",
+        "./mobileUI.js": "./mobileUI.js",
+        "./lightbox.js": "./lightbox.js",
+        "./utils.js": "./utils.js",
+        "./gemini.js": "./gemini.js",
+        "./thinkingMode.js": "./thinkingMode.js",
+        "./systemMessages.js": "./systemMessages.js",
+        "./codePreview.js": "./codePreview.js",
+        "./subscription.js": "./subscription.js",
+        "./subscriptionUI.js": "./subscriptionUI.js",
+        "emoji-picker-element": "https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- Mobile Menu Toggle Button -->
+  <button id="menu-toggle-button"><i class="fas fa-bars"></i></button>
+
+  <div id="main-container">
+    <div id="sidebar">
+      <button id="sidebar-close-button"><i class="fas fa-times"></i></button>
+      <div class="sidebar-header">
+        <img src="/wach_tahan.png" alt="Miko" class="sidebar-logo">
+        <h2>Miko AI</h2>
+      </div>
+      <button class="new-chat-button" id="new-chat-button"><i class="fas fa-plus"></i>New Chat</button>
+      <button id="image-button"><i class="fas fa-image"></i>Create Image</button>
+      <button id="upload-image-button"><i class="fas fa-upload"></i>Upload Image & Ask</button>
+      <button id="subscription-button" class="sidebar-button">
+        <i class="fas fa-crown"></i>Subscription Plans
+      </button>
+      <h3>Previous Chats</h3>
+      <ul id="chat-list">
+        <!-- Chat history items will be populated here -->
+      </ul>
+    </div>
+
+    <div id="chat-container">
+      <div id="chat-header">
+        <h1>Miko AI Assistant</h1>
+      </div>
+      
+      <div id="chat-log">
+          <!-- Messages appear here -->
+      </div>
+
+      <!-- Typing Indicator -->
+      <div id="typing-indicator">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+
+      <!-- Enhanced Image Prompt Area -->
+      <div id="image-prompt-container">
+        <div class="prompt-header">
+            <span>Image Generation Options</span>
+            <button id="remove-image-prompt-button" class="remove-style-button"><i class="fas fa-times"></i></button>
+        </div>
+        <input type="text" id="image-prompt-input" placeholder="Enter image description...">
+        <div class="image-options">
+             <select id="image-style-select">
+                <option value="default">Default Style</option>
+                <option value="real">Real</option>
+                <option value="cartoon">Cartoon</option>
+                <option value="3d-cartoon">3D Cartoon</option>
+                <option value="disney">Disney</option>
+                <option value="ghibli">Studio Ghibli</option>
+                <option value="gombad">GOMBAD</option>
+                <option value="simpsons">The Simpsons</option>
+                <option value="muppet">Muppet</option>
+                <option value="minecraft">Minecraft</option>
+                <option value="zombie">Zombie</option>
+                <option value="concept-art">Concept Art</option>
+                <option value="epic">Epic</option>
+                <option value="gta">GTA</option>
+            </select>
+             <select id="image-aspect-ratio-select">
+                <option value="1:1">Square (1:1)</option>
+                <option value="16:9">Widescreen (16:9)</option>
+                <option value="9:16">Portrait (9:16)</option>
+                <option value="4:3">Landscape (4:3)</option>
+                <option value="3:4">Portrait (3:4)</option>
+                <option value="21:9">Cinematic (21:9)</option>
+                <option value="9:21">Tall Cinematic (9:21)</option>
+                <option value="3:2">Landscape (3:2)</option>
+                <option value="2:3">Portrait (2:3)</option>
+                <option value="4:5">Portrait (4:5)</option>
+                <option value="5:4">Landscape (5:4)</option>
+            </select>
+        </div>
+        <button id="generate-image-button"><i class="fas fa-magic"></i>Generate Images</button>
+      </div>
+
+      <!-- Image Upload Area -->
+      <div id="image-upload-container">
+        <div class="prompt-header">
+            <span>Upload Image & Ask</span>
+            <button id="remove-image-upload-button" class="remove-style-button"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="upload-area">
+            <div id="upload-dropzone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop an image or click to browse</p>
+                <input type="file" id="image-file-input" accept="image/*">
+            </div>
+            <div id="upload-preview-container">
+                <img id="upload-preview" alt="Uploaded image preview">
+                <button id="remove-upload-button"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </div>
+        <input type="text" id="image-question-input" placeholder="Ask a question about this image...">
+        <button id="analyze-image-button"><i class="fas fa-search"></i>Analyze Image</button>
+      </div>
+
+      <!-- Input Area -->
+      <div id="input-area">
+        <input type="text" id="message-input" placeholder="Message Miko...">
+        <div class="input-buttons">
+          <button id="thinking-mode-button" class="icon-button" title="Toggle Thinking Mode"><i class="fas fa-brain"></i></button>
+          <button id="send-button" class="icon-button"><i class="fas fa-paper-plane"></i></button>
+          <button id="mic-button" class="icon-button"><i class="fas fa-microphone"></i></button>
+        </div>
+      </div>
+
+       <!-- Emoji Picker Element (will be positioned absolutely) -->
+       <emoji-picker class="dark" id="emoji-picker"></emoji-picker>
+
+    </div>
+  </div>
+
+  <!-- Image Lightbox -->
+  <div id="image-lightbox">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-content">
+  </div>
+
+  <!-- Load the main chat script -->
+  <script type="module" src="chat.js"></script>
+  <!-- Load Emoji Picker library -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+
+</body>
+</html>
